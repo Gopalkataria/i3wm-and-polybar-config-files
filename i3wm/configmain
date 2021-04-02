@@ -1,0 +1,263 @@
+# set modifier
+set $super Mod4
+set $alt Mod1
+set $hyper Mod3
+
+# set font
+font pango: Roboto Medium 10 
+
+# Use Mouse+$super to drag floating windows to their wanted position
+floating_modifier $super
+
+# set deafult layout as tabbed 
+workspace_layout tabbed 
+
+#autostart
+## check twice brofre removing anything 
+exec --no-startup-id hsetroot -cover ~/PATH_TO_YOUR_FILE/new.jpg 
+exec --no-startup-id polybar bottombar 
+exec --no-startup-id /usr/bin/gnome-keyring-daemon --start --components=secrets
+exec --no-startup-id /usr/share/libpam-kwallet-common/pam_kwallet_init
+exec --no-startup-id xsettingsd &
+exec --no-startup-id compton -b
+exec --no-startup-id xss-lock --transfer-sleep-lock -- ~/sys_custom/lockscreen/lock.sh 
+exec --no-startup-id xmodmap ~/.Xmodmap
+exec --no-startup-id dunst 
+exec --no-startup-id nm-applet
+exec --no-startup-id kdeconnect-indicator
+
+# centre the title 
+title_align center 
+
+# start a terminal
+bindsym $super+Return exec konsole
+
+# Screenshot shortcut 
+bindsym $super+Print exec scrot 'date-%d-%m-%y-time-%H-%M-%S.png' -e 'mv $f ~/Pictures/Screenshot/'
+
+# krunner shortcut 
+bindsym $alt+space exec krunner 
+
+# start dmenu (a program launcher)
+bindsym $super+Shift+d exec i3-dmenu-desktop --dmenu="dmenu -i -fn 'Noto Sans:size=14'"
+
+# rofi keybindings 
+bindsym $hyper+semicolon exec rofi -lines 8 -padding 5 -width 80 -show window -sidebar-mode -columns 2 -font 'Roboto Sans 14' -icon-theme la-capitaine-icon-theme -show-icons -theme ~/PATH_TO_YOUR_FILE/new.rasi
+bindsym $hyper+l         exec rofi -lines 8 -padding 5 -width 80 -show drun   -sidebar-mode -columns 2 -font 'Roboto Sans 14' -icon-theme la-capitaine-icon-theme -show-icons -theme ~/PATH_TO_YOUR_FILE/new.rasi 
+bindsym $super+d         exec rofi -lines 8 -padding 5 -width 80 -show drun   -sidebar-mode -columns 2 -font 'Roboto Sans 14' -icon-theme la-capitaine-icon-theme -show-icons -theme ~/PATH_TO_YOUR_FILE/new.rasi
+bindsym $super+r         exec rofi -lines 8 -padding 5 -width 80 -show run    -sidebar-mode -columns 2 -font 'Roboto Sans 14' -theme ~/PATH_TO_YOUR_FILE/new.rasi
+
+#lock screen keybinding 
+bindsym $super+l exec ~/sys_custom/lockscreen/lock.sh
+
+# common apps keybindings, diabled some for now  
+# bindsym $hyper+k exec google-chrome -new-tab
+
+# bindsym $super+Shift+f exec thunar;workspace 3;focus
+# bindsym $super+Shift+g exec geany
+
+#change volume
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5% 
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+
+# music control
+bindsym XF86AudioNext exec mpc next
+bindsym XF86AudioPrev exec mpc prev
+bindsym XF86AudioPlay exec mpc toggle
+bindsym XF86AudioStop exec mpc stop
+bindsym $hyper+s exec playerctl play-pause
+
+# kill focused window
+bindsym $super+q kill
+bindsym $alt+F4 kill
+
+# change focus
+bindsym $super+Left focus left
+bindsym $super+Down focus down
+bindsym $super+Up focus up
+bindsym $super+Right focus right
+bindsym $super+a focus parent
+bindsym $super+c focus child  
+
+# move focused window
+bindsym $super+Shift+Left move left
+bindsym $super+Shift+Down move down
+bindsym $super+Shift+Up move up
+bindsym $super+Shift+Right move right
+
+# move focused window using hyper 
+bindsym $hyper+Left move left
+bindsym $hyper+Down move down
+bindsym $hyper+Up move up
+bindsym $hyper+Right move right
+
+# split in horizontal orientation
+bindsym $super+h split h
+
+# split in vertical orientation
+bindsym $super+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $super+f fullscreen toggle
+
+# change container layout split
+bindsym $super+e layout stacking
+bindsym $super+w layout tabbed
+bindsym $super+s layout toggle split
+
+# toggle tiling / floating
+bindsym $super+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $super+Shift+space focus mode_toggle
+
+# switch to workspace
+bindsym $alt+Control+Right workspace next
+bindsym $alt+ControlLeft workspace prev
+bindsym $hyper+Tab workspace back_and_forth
+bindsym $super+Tab workspace next 
+
+# actual workspace switching
+bindsym $super+1 workspace 1
+bindsym $super+2 workspace 2
+bindsym $super+3 workspace 3
+bindsym $super+4 workspace 4
+bindsym $super+5 workspace 5
+bindsym $super+6 workspace 6
+
+# actual workspace switching using hyper keys 
+bindsym $hyper+p workspace 1
+bindsym $hyper+o workspace 2
+bindsym $hyper+i workspace 3
+bindsym $hyper+u workspace 4
+bindsym $hyper+y workspace 5
+bindsym $hyper+t workspace 6
+
+# move focused container to workspace
+bindsym $super+Shift+1 move container to workspace 1
+bindsym $super+Shift+2 move container to workspace 2
+bindsym $super+Shift+3 move container to workspace 3
+bindsym $super+Shift+4 move container to workspace 4
+bindsym $super+Shift+5 move container to workspace 5
+bindsym $super+Shift+6 move container to workspace 6
+
+# move focused container to workspace using hyper keys 
+bindsym $hyper+1 move container to workspace 1
+bindsym $hyper+2 move container to workspace 2
+bindsym $hyper+3 move container to workspace 3
+bindsym $hyper+4 move container to workspace 4
+bindsym $hyper+5 move container to workspace 5
+bindsym $hyper+6 move container to workspace 6
+
+# scratchpad workspace 
+bindsym $hyper+j move scratchpad 
+bindsym $hyper+k scratchpad show 
+
+# i3bar states
+# Toggle between hide state and show state
+bindsym $hyper+n bar hidden_state toggle
+
+#close window on middle click 
+bindsym --release button2 kill
+
+# Toggle between dock mode and hide mode
+bindsym $hyper+b bar mode toggle
+
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $super+Shift+r restart
+
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $hyper+Shift+r reload
+
+# respawn wallpaper and color scheme 
+bindsym $super+$hyper+r exec ~/PATH_TO_YOUR_FILE/respawn.sh  
+
+
+# exit i3
+bindsym $super+Shift+q exec "i3-nagbar -t warning -m 'Close everything and Exit current environment ?' -b 'Yes' 'i3-msg exit'"
+
+# poweroff system 
+bindsym $super+F4 exec ~/sys_custom/lockscreen/poweroptions.sh 
+ 
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        bindsym Left resize shrink width 5 px or 5 ppt
+        bindsym Down resize grow height 5 px or 5 ppt
+        bindsym Up resize shrink height 5 px or 5 ppt
+        bindsym Right resize grow width 5 px or 5 ppt
+        bindsym Return mode "default"
+	bindsym Escape mode "default"
+	bindsym $hyper+r mode "default"
+}
+bindsym $hyper+r mode "resize"
+
+mode "move" {
+        bindsym Left move left 
+        bindsym Down move down
+        bindsym Up move up
+        bindsym Right move right
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+	bindsym $hyper+m mode "default"
+}
+bindsym $hyper+m mode "move"
+
+# a mode to quick switch workspaces all around when not actually using numbers keys 
+# for fun, highly recommended tho 
+mode "workspacer" {
+	
+	# changing focus around
+	bindsym Left focus left
+	bindsym Right focus right
+	bindsym Up focus up
+	bindsym Down focus down
+	
+	# move focused container to workspace using hyper keys 
+	bindsym $hyper+1 move container to workspace 1
+	bindsym $hyper+2 move container to workspace 2
+	bindsym $hyper+3 move container to workspace 3
+	bindsym $hyper+4 move container to workspace 4
+	bindsym $hyper+5 move container to workspace 5
+	bindsym $hyper+6 move container to workspace 6
+
+
+	# navigate windows by a single click 
+	bindsym 1 workspace 1
+	bindsym 2 workspace 2
+	bindsym 3 workspace 3
+	bindsym 4 workspace 4
+	bindsym 5 workspace 5
+	bindsym 6 workspace 6
+	bindsym Escape mode "default"
+	bindsym $hyper+w mode "default"
+}
+bindsym $hyper+w mode "workspacer" 
+
+
+for_window [class=Code] move window to workspace 6
+
+# window rules, you can find the window class using xprop
+default_border pixel 2
+for_window [class=".*"] border pixel 2 
+for_window [class=Viewnior|feh|Audacious|File-roller|Lxappearance|Lxtask|Pavucontrol|Eog] floating enable
+for_window [class=URxvt|Firefox|Google-chrome|Geany|Evince|Soffice|libreoffice*|mpv|Ghb|Xfburn|Gimp*|Inkscape|Vlc|Lxappearance|Audacity] focus
+for_window [class=Evince] move window to workspace 5
+for_window [class=Xfburn|GParted|System-config-printer.py|Lxtask|Pavucontrol|Exo-helper*|Lxrandr|Arandr] focus
+for_window [class=krunner] border none  
+for_window [class="Google-chrome" instance="crx_gkhjfpbdpbknhmookefdbaljpckbicba"] move window to scratchpad , scratchpad show , resize set 1000 700 , move position 80 20
+for_window [class="Google-chrome" instance="crx_pjibgclleladliembfgfagdaldikeohf"] move window to scratchpad , scratchpad show , resize set 1000 700 , move position 80 20
+
+
+#hide borders around edges of screen
+hide_edge_borders both 
+
+# colour of                 border, background, text, indicator,child_border
+client.focused              #40404f COLOR #000000 #85069d #2f343f
+client.focused_inactive     #2f343f #2f343f #d8dee8 #85069d #2f343f
+client.unfocused            #2f343f #2f343f #d8dee8 #85069d #2f343f
+client.urgent               #2f343f #2f343f #d8dee8 #85069d #2f343f
+client.placeholder          #2f343f #2f343f #d8dee8 #85069d #2f343f
+client.background           #85069d
+
