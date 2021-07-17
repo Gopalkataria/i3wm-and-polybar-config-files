@@ -14,7 +14,7 @@ workspace_layout tabbed
 
 #autostart
 ## check twice brofre removing anything 
-exec --no-startup-id hsetroot -cover ~/PATH_TO_YOUR_FILE/new.jpg 
+exec --no-startup-id hsetroot -cover ~/sys_custom/wallpaper/new.jpg 
 exec --no-startup-id polybar bottombar 
 exec --no-startup-id /usr/bin/gnome-keyring-daemon --start --components=secrets
 exec --no-startup-id /usr/share/libpam-kwallet-common/pam_kwallet_init
@@ -27,10 +27,13 @@ exec --no-startup-id nm-applet
 exec --no-startup-id kdeconnect-indicator
 
 # centre the title 
-title_align center 
+title_align center
+
+# emoji menu  
+bindsym $super+period exec ~/sys_custom/rofi-emoji/emoji.sh
 
 # start a terminal
-bindsym $super+Return exec konsole
+bindsym $super+Return exec urxvt  
 
 # Screenshot shortcut 
 bindsym $super+Print exec scrot 'date-%d-%m-%y-time-%H-%M-%S.png' -e 'mv $f ~/Pictures/Screenshot/'
@@ -42,10 +45,10 @@ bindsym $alt+space exec krunner
 bindsym $super+Shift+d exec i3-dmenu-desktop --dmenu="dmenu -i -fn 'Noto Sans:size=14'"
 
 # rofi keybindings 
-bindsym $hyper+semicolon exec rofi -lines 8 -padding 5 -width 80 -show window -sidebar-mode -columns 2 -font 'Roboto Sans 14' -icon-theme la-capitaine-icon-theme -show-icons -theme ~/PATH_TO_YOUR_FILE/new.rasi
-bindsym $hyper+l         exec rofi -lines 8 -padding 5 -width 80 -show drun   -sidebar-mode -columns 2 -font 'Roboto Sans 14' -icon-theme la-capitaine-icon-theme -show-icons -theme ~/PATH_TO_YOUR_FILE/new.rasi 
-bindsym $super+d         exec rofi -lines 8 -padding 5 -width 80 -show drun   -sidebar-mode -columns 2 -font 'Roboto Sans 14' -icon-theme la-capitaine-icon-theme -show-icons -theme ~/PATH_TO_YOUR_FILE/new.rasi
-bindsym $super+r         exec rofi -lines 8 -padding 5 -width 80 -show run    -sidebar-mode -columns 2 -font 'Roboto Sans 14' -theme ~/PATH_TO_YOUR_FILE/new.rasi
+bindsym $hyper+semicolon exec rofi -lines 8 -padding 5 -width 80 -show window -sidebar-mode -columns 2 -font 'Roboto Sans 14' -icon-theme la-capitaine-icon-theme -show-icons -theme ~/sys_custom/wallpaper/new.rasi
+bindsym $hyper+l         exec rofi -lines 8 -padding 5 -width 80 -show drun   -sidebar-mode -columns 2 -font 'Roboto Sans 14' -icon-theme la-capitaine-icon-theme -show-icons -theme ~/sys_custom/wallpaper/new.rasi 
+bindsym $super+d         exec rofi -lines 8 -padding 5 -width 80 -show drun   -sidebar-mode -columns 2 -font 'Roboto Sans 14' -icon-theme la-capitaine-icon-theme -show-icons -theme ~/sys_custom/wallpaper/new.rasi
+bindsym $super+r         exec rofi -lines 8 -padding 5 -width 80 -show run    -sidebar-mode -columns 2 -font 'Roboto Sans 14' -theme ~/sys_custom/wallpaper/new.rasi
 
 #lock screen keybinding 
 bindsym $super+l exec ~/sys_custom/lockscreen/lock.sh
@@ -171,7 +174,7 @@ bindsym $super+Shift+r restart
 bindsym $hyper+Shift+r reload
 
 # respawn wallpaper and color scheme 
-bindsym $super+$hyper+r exec ~/PATH_TO_YOUR_FILE/respawn.sh  
+bindsym $super+$hyper+r exec ~/sys_custom/wallpaper/respawn.sh  
 
 
 # exit i3
@@ -248,7 +251,7 @@ for_window [class=Xfburn|GParted|System-config-printer.py|Lxtask|Pavucontrol|Exo
 for_window [class=krunner] border none  
 for_window [class="Google-chrome" instance="crx_gkhjfpbdpbknhmookefdbaljpckbicba"] move window to scratchpad , scratchpad show , resize set 1000 700 , move position 80 20
 for_window [class="Google-chrome" instance="crx_pjibgclleladliembfgfagdaldikeohf"] move window to scratchpad , scratchpad show , resize set 1000 700 , move position 80 20
-
+for_window [class="Google-chrome" instance="crx_emacdpakoihlgkpbekbfnhinbipjbepd"] move window to scratchpad , scratchpad show , resize set 1000 700 , move position 80 20
 
 #hide borders around edges of screen
 hide_edge_borders both 

@@ -1,58 +1,61 @@
 [global]
 monitor = 0
 follow = mouse
-geometry = "600x50-24+24"
+geometry = "700x50-24+24"
 indicate_hidden = yes
 shrink = yes
-separator_height = 0
+separator_height = 2
 padding = 16
 horizontal_padding = 24
 frame_width = 2
 sort = no
-idle_threshold = 120
-font = Noto Sans 8
+idle_threshold = 6
+font = Roboto Sans 9
 line_height = 4
 markup = full
-format = "<b>%s</b>\n%b"
+format = "<b>%a</b>\n%s\n%b\n\n%p"
 alignment = left
-show_age_threshold = 60
+show_age_threshold = 5
 word_wrap = yes
-ignore_newline = no
+ignore_newline = yes
 stack_duplicates = false
 hide_duplicate_count = yes
 show_indicators = yes
-icon_position = on
+icon_position = left
 sticky_history = yes
 history_length = 20
 browser = google-chrome -new-tab
 always_run_script = true
 title = Dunst
 class = Dunst
+mouse_left_click = close_current 
+mouse_right_click = do_action
+mouse_middle_click = close_all
+dmenu = rofi -lines 5 -padding 5 -width 40 -dmenu  -sidebar-mode -columns 1 -font 'Roboto Sans 15' -icon-theme la-capitaine-icon-    theme -show-icons -theme ~/sys_custom/wallpaper/new.rasi -modi "drun" -location 8 -p Action
+icon_path = "/home/gopal/.icons/la-capitaine-icon-theme/status/scalable-dark/:/home/gopal/.icons/la-capitaine-icon-theme/status/symbolic/:/home/gopal/.icons/la-capitaine-icon-theme/places/16x16-dark/:/home/gopal/.icons/la-capitaine-icon-theme/panel/16-dark/:/home/gopal/.icons/la-capitaine-icon-theme/mimetypes/symbolic/:/home/gopal/.icons/la-capitaine-icon-theme/devices/scalable-dark/:/home/gopal/.icons/la-capitaine-icon-theme/apps/symbolic/:/home/gopal/.icons/la-capitaine-icon-theme/actions/22x22-dark/" 
+
 
 [shortcuts]
-close = ctrl+space
-close_all = ctrl+shift+x
-history = ctrl+grave
-context = ctrl+shift+space
-
-
-# colors have to be defined in ""
-# Otherwise color would be interpreted as a comment.
+;close = super+x
+;close_all = meta+shift+x 
+;history = ctrl+grave
+context = ctrl+space
 
 [urgency_low]
-frame_color = "#FFFFFF"
-foreground = "#FFEE79"
-background = "#2F343F"
+frame_color = "#2f343f"
+foreground = "#FFFFFF"
+background = "#000000"
 timeout = 5
 
 [urgency_normal]
-frame_color = "#00FF00"
-foreground = "#FFEE79"
-background = "#2F343F"
+frame_color = "#ff6989"
+foreground = "#FDF6E3"
+background = "#000000"
 timeout = 10
 
 [urgency_critical]
 frame_color = "#FF0000"
-foreground = "#FFFF00"
-background = "#2F343F"
+foreground = "#ffffff"
+background = "#400000"
+
 timeout = 20

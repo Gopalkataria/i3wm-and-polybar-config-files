@@ -10,67 +10,28 @@
 ;   ╚═╝      ╚═════╝ ╚══════╝╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
 ;███████████████████████████████████████████████████████████
 ;
-;  
+;   To learn more about how to configure Polybar
+;   go to https://github.com/polybar/polybar
+;
+;   The README contains a lot of information
 ;
 ;==========================================================
 
 [colors]
-;background = #fff
+;background = #1c1e26
 background = #1c1e26
-background-transparent = #00000000
 background-alt = #2f343f
 ;foreground = ${xrdb:color7:#222}
 foreground = #fff
-foreground-alt = #ffff3
-primary = #ff6989
-secondary = #ffffff
+foreground-alt = #fff
+primary = #ff9269
+secondary = #ff9269
 alert = #bd2c40
-
-
-
-[bar/minimalbar]
-;monitor = ${env:MONITOR:HDMI-1}
-width = 40%
-height = 20
-fixed-center = false 
-
-background = ${colors.background-transparent} 
-foreground = ${colors.foreground}
-
-line-size = 3
-line-color = #f00
-
-border-size = 0  
-border-color = #000000
-border-radius = 4
-
-offset-x = 30%
-
-module-margin-left = 1
-module-margin-right = 1
-
-font-0 = Fira Code:style=Medium:size=9
-font-1 =  Material\-Design\-Iconic\-Font:style=Design-Iconic-Font:size=10
-font-2 =  Material\-Design\-Iconic\-Font:style=Design-Iconic-Font:size=10
-
-modules-center = i3long scratchpad  
-
-;wm-restack = i3
-
-override-redirect = true
-
-bottom = true 
-
-scroll-down = #i3.next
-scroll-up = #i3.prev
-
-cursor-click = pointer
-
 
 [bar/bottombar]
 ;monitor = ${env:MONITOR:HDMI-1}
 width = 100%
-height = 19
+height = 23
 fixed-center = false
 
 background = ${colors.background}
@@ -88,20 +49,18 @@ padding-right = 2
 module-margin-left = 1
 module-margin-right = 1
 
-font-0 = JetBrains Mono:style=Light:size=10
-font-1 =  Material\-Design\-Iconic\-Font:style=Design-Iconic-Font:size=8
-font-2 =  Material\-Design\-Iconic\-Font:style=Design-Iconic-Font:size=8
+font-0 = JetBrains Mono:style=Light:size=9
+font-1 =  Material\-Design\-Iconic\-Font:style=Design-Iconic-Font:size=10
+font-2 =  Material\-Design\-Iconic\-Font:style=Design-Iconic-Font:size=10
 
 
-modules-left = scratchpad 
-modules-center =  i3  
-modules-right = cpu memory  battery wlan  musicname  pulseaudio time date  
-;modules-right =  musicname  pulseaudio battery wlan  time date  
-
+modules-left = start 
+modules-center =  i3 musicname 
+modules-right = cpu memory  battery wlan eth  pulseaudio time date   
 
 tray-position = right
 tray-padding = 2
-tray-background = ${colors.background}
+tray-background = #1c1e26
 
 wm-restack = i3
 
@@ -114,23 +73,11 @@ scroll-up = #i3.prev
 
 cursor-click = pointer
 
-
-[module/bnep]
-type = internal/network
-interface = bnep0
-
-format-connected = <label-connected>
-label-connected = Bluetooth (%downspeed% / %upspeed%)
-
-format-disconnected =
-
-unknown-as-up = true
-
 [module/start]
 type = custom/text
 content = 
 click-left = rofi -lines 8 -padding 5 -width 40 -show drun  -location 1 -columns 1 -font 'Roboto Sans 14' -icon-theme la-capitaine-icon-theme -show-icons -theme ~/sys_custom/wallpaper/new.rasi &
-click-right = exec ~/.config/polybar/minimal.sh n 
+click-right = exec ~/sys_custom/lockscreen/poweroptions.sh &
 
 
 [module/xwindow]
@@ -143,15 +90,15 @@ blacklist-0 = num lock
 
 format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
-;format-prefix-underline = ${colors.secondary}
+format-prefix-underline = ${colors.secondary}
 
 label-layout = %layout%
-;label-layout-underline = ${colors.secondary}
+label-layout-underline = ${colors.secondary}
 
 label-indicator-padding = 2
 label-indicator-margin = 1
 label-indicator-background = ${colors.secondary}
-;label-indicator-underline = ${colors.secondary}
+label-indicator-underline = ${colors.secondary}
 
 [module/filesystem]
 type = internal/fs
@@ -168,7 +115,7 @@ type = internal/bspwm
 
 label-focused = %index%
 label-focused-background = ${colors.background-alt}
-;label-focused-underline= ${colors.primary}
+label-focused-underline= ${colors.primary}
 label-focused-padding = 2
 
 label-occupied = %index%
@@ -185,56 +132,11 @@ label-empty-padding = 2
 ; Separator in between workspaces
 ; label-separator = |
 
-
-[module/i3long]
-type = internal/i3
-format = <label-state> <label-mode>
-index-sort = false
-wrapping-scroll = false
-strip-wsnumbers = true
-
-; Only show workspaces on the same output as the bar
-;pin-workspaces = true
-
-label-mode-padding = 2
-label-mode-foreground = #000
-label-mode-background = ${colors.primary}
-
-; focused = Active workspace on focused monitor
-label-focused = Workspace %name% 
-label-focused-background = ${colors.background-alt}
-;label-focused-underline= ${colors.primary}
-label-focused-padding = 2
-
-; unfocused = Inactive workspace on any monitor
-label-unfocused = %name%
-label-unfocused-padding = 2
-label-unfocused-background = ${colors.background}
-
-; visible = Active workspace on unfocused monitor
-label-visible = %name%
-label-visible-background = ${self.label-focused-background}
-;label-visible-underline = ${self.label-focused-underline}
-label-visible-padding = ${self.label-focused-padding}
-
-; urgent = Workspace with urgency hint set
-label-urgent =  %name% 
-label-urgent-background = ${colors.primary}
-label-urgent-foreground = ${colors.background}
-label-urgent-padding = 2
-
-; Separator in between workspaces
-label-separator = |
-label-separator-background = ${colors.background}
-label-separator-foreground = #000000
-
-
 [module/i3]
 type = internal/i3
 format = <label-state> <label-mode>
-index-sort = false
+index-sort = true
 wrapping-scroll = false
-strip-wsnumbers = true
 
 ; Only show workspaces on the same output as the bar
 ;pin-workspaces = true
@@ -244,31 +146,28 @@ label-mode-foreground = #000
 label-mode-background = ${colors.primary}
 
 ; focused = Active workspace on focused monitor
-label-focused = %name% 
+label-focused = %index%
 label-focused-background = ${colors.background-alt}
-;label-focused-underline= ${colors.primary}
+label-focused-underline= ${colors.primary}
 label-focused-padding = 2
 
 ; unfocused = Inactive workspace on any monitor
 label-unfocused = %index%
 label-unfocused-padding = 2
-label-unfocused-background = ${colors.background}
 
 ; visible = Active workspace on unfocused monitor
 label-visible = %index%
 label-visible-background = ${self.label-focused-background}
-;label-visible-underline = ${self.label-focused-underline}
+label-visible-underline = ${self.label-focused-underline}
 label-visible-padding = ${self.label-focused-padding}
 
 ; urgent = Workspace with urgency hint set
-label-urgent =  %name% 
+label-urgent = %index%
 label-urgent-background = ${colors.primary}
-label-urgent-foreground = ${colors.background}
 label-urgent-padding = 2
 
 ; Separator in between workspaces
 label-separator = |
-label-separator-background = ${colors.background}
 label-separator-foreground = #000000
 
 [module/mpd]
@@ -292,7 +191,7 @@ label = BL
 
 bar-width = 10
 bar-indicator = |
-bar-indicator-foreground = #000
+bar-indicator-foreground = #fff
 bar-indicator-font = 2
 bar-fill = ─
 bar-fill-font = 2
@@ -311,7 +210,7 @@ type = internal/cpu
 interval = 2
 format-prefix = " "
 format-prefix-foreground = ${colors.primary}
-;format-underline = ${colors.primary}
+format-underline = ${colors.primary}
 label =  %percentage%%
 
 [module/memory]
@@ -319,7 +218,7 @@ type = internal/memory
 interval = 2
 format-prefix = " "
 format-prefix-foreground = ${colors.primary}
-;format-underline = ${colors.primary}
+format-underline = ${colors.primary}
 label =  %percentage_used%%
 
 [module/wlan]
@@ -328,15 +227,15 @@ interface = wlp2s0
 interval = 3.0
 
 format-connected = <ramp-signal> <label-connected>
-;format-connected-underline = ${colors.primary}
-label-connected = %{A1:kcmshell5 kcm_networkmanagement &:}%{A3:kcmshell5 bluedevildevices &:}%essid%%{A}%{A}
+format-connected-underline = ${colors.primary}
+label-connected = %essid%
 
 
-format-disconnected = %{A1:kcmshell5 kcm_networkmanagement &:}%{A3:kcmshell5 bluedevildevices &:}WiFi%{A}%{A}
+format-disconnected = No WiFi
 ;format-disconnected = <label-disconnected>
 format-disconnected-prefix = " "
-;format-disconnected-prefix-underline = #990000
-;format-disconnected-underline = #990000 
+format-disconnected-prefix-underline = #990000
+format-disconnected-underline = #990000 
 label-disconnected = %ifname% disconnected
 label-disconnected-foreground = ${colors.primary}
 
@@ -352,15 +251,14 @@ type = internal/network
 interface = enp1s0
 interval = 3.0
 
+format-connected-underline = #55aa55
 format-connected-prefix = " "
 format-connected-prefix-foreground = ${colors.foreground-alt}
-label-connected = %{A1:kcmshell5 kcm_networkmanagement &:}%local_ip%%{A}
-;format-connected-underline = ${colors.primary}
+label-connected = %local_ip%
 
-
-format-disconnected = %{A1:kcmshell5 kcm_networkmanagement &:}Ether%{A}
+format-disconnected =
 ;format-disconnected = <label-disconnected>
-;;format-disconnected-underline = ${self.format-connected-underline}
+;format-disconnected-underline = ${self.format-connected-underline}
 ;label-disconnected = %ifname% disconnected
 ;label-disconnected-foreground = ${colors.foreground-alt}
 
@@ -373,7 +271,7 @@ time-alt = %r
 
 format-prefix = " "
 format-prefix-foreground = ${colors.primary}
-;format-underline = ${colors.primary}
+format-underline = ${colors.primary}
 
 label = %time% 
 
@@ -381,14 +279,13 @@ label = %time%
 type = internal/date
 interval = 5
 
-date =  %{A1:gsimplecal &:}%a %d %b%{A}   
-date-alt = "%d/%m/%Y"
+date =  %a %d %b   
+date-alt = " %d/%m/%Y"
 
-click-left = gsimplecal &
 
 format-prefix = " "
 format-prefix-foreground = ${colors.primary}
-;format-underline = ${colors.primary}
+format-underline = ${colors.primary}
 
 label = %date% 
 
@@ -398,19 +295,18 @@ type = internal/pulseaudio
 format-volume = <label-volume> <bar-volume>
 label-volume = %percentage%%
 label-volume-foreground = ${root.foreground}
-;label-volume-underline = ${colors.primary}
+label-volume-underline = ${colors.primary}
 format-volume-prefix = " "
 format-volume-prefix-foreground = ${colors.primary}
-;format-volume-prefix-underline = ${colors.primary}
+format-volume-prefix-underline = ${colors.primary}
 
-click-right = pavucontrol  
 
 label-muted = muted
 label-muted-foreground = ${colors.primary}
-;label-muted-underline = ${colors.primary}
+label-muted-underline = ${colors.primary}
 format-muted-prefix = " "
 format-muted-prefix-foreground = ${colors.primary}
-;format-muted-prefix-underline = ${colors.primary}
+format-muted-prefix-underline = ${colors.primary}
 
 bar-volume-width = 10
 bar-volume-foreground-0 = ${colors.primary}
@@ -421,15 +317,15 @@ bar-volume-foreground-4 = ${colors.primary}
 bar-volume-foreground-5 = ${colors.primary}
 bar-volume-foreground-6 = ${colors.primary}
 bar-volume-gradient = true
-bar-volume-indicator = "" 
+bar-volume-indicator = █
 bar-volume-indicator-font = 1
 bar-volume-indicator-foreground = #ff3f3f
 bar-volume-fill = █
 bar-volume-fill-font = 1
 bar-volume-empty =  █
 bar-volume-empty-font = 1
-bar-volume-empty-foreground = ${colors.background-alt}
-;bar-volume-underline = ${colors.primary}
+bar-volume-empty-foreground = ${colors.background}
+bar-volume-underline = ${colors.primary}
 
 [module/alsa]
 type = internal/alsa
@@ -466,14 +362,14 @@ adapter = ACAD
 full-at = 99
 
 format-charging = <animation-charging> <label-charging>
-;format-charging-underline = ${colors.primary}
+format-charging-underline = ${colors.primary}
 
 format-discharging = <animation-discharging> <label-discharging>
-;format-discharging-underline = ${colors.primary}
+format-discharging-underline = ${colors.primary}
 
-format-full-prefix = " "
+format-full-prefix = "  "
 format-full-prefix-foreground = ${colors.primary}
-;format-full-underline = ${self.format-charging-underline}
+format-full-underline = ${self.format-charging-underline}
 
 ramp-capacity-0 = 
 ramp-capacity-1 = 
@@ -489,7 +385,7 @@ animation-charging-framerate = 1000
 animation-discharging-0 = 
 animation-discharging-1 = 
 animation-discharging-2 = 
-animation-discharging-foreground = #0009f9
+animation-discharging-foreground = #fff9f9
 animation-discharging-framerate = 1000
 
 [module/temperature]
@@ -498,9 +394,9 @@ thermal-zone = 0
 warn-temperature = 60
 
 format = <ramp> <label>
-;format-underline = #f50a4d
+format-underline = #f50a4d
 format-warn = <ramp> <label-warn>
-;format-warn-underline = ${self.format-underline}
+format-warn-underline = ${self.format-underline}
 
 label = %temperature-c%
 label-warn = %temperature-c%
@@ -520,7 +416,7 @@ format-spacing = 1
 
 label-open =  
 label-open-foreground = ${colors.secondary}
-;label-open-underline = ${colors.primary}
+label-open-underline = ${colors.primary}
 label-close =  
 label-close-foreground = ${colors.secondary}
 label-separator = " "
@@ -550,23 +446,13 @@ type = custom/script
 label = %output:0:15:..%
 format-prefix = " "
 format-prefix-foreground = ${colors.primary}
-;format-prefix-underline = ${colors.primary}
-;label-underline = ${colors.primary}
+format-prefix-underline = ${colors.primary}
+label-underline = ${colors.primary}
 exec = /home/gopal/.config/polybar/musicname.sh  
 interval = 3  
 click-left = playerctl play-pause 
-click-right = i3-msg scratchpad show
-click-middle = playerctl next 
-
-[module/scratchpad] 
-type = custom/text 
-content  = "  "
-content-background = ${colors.primary}
-content-foreground = ${colors.background} 
-click-left = i3-msg scratchpad show 
-click-right = playerctl play-pause 
-scroll-up = pactl set-sink-volume @DEFAULT_SINK@ +1%
-scroll-down = pactl set-sink-volume @DEFAULT_SINK@ -1%
+click-right = playerctl next
+click-middle = playerctl previous
 
 [module/powermenu]
 type = custom/menu
